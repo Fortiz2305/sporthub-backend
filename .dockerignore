@@ -1,0 +1,2 @@
+# Ignore modules during the build
+node_modules
