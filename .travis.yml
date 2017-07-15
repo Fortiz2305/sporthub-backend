@@ -13,7 +13,7 @@ addons:
 services:
   - mongodb
 before_script:
-  - cd backend && npm install
+  - npm install
 after_success:
   - npm i coveralls
   - ./node_modules/coveralls/bin/coveralls.js < ./backend/coverage/lcov.info
