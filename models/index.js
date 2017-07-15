@@ -2,9 +2,11 @@
 const mongoose = require('mongoose');
 const config = require('../config/config');
 
-const mongoHost = process.env.MONGO_HOST || config.database.host;
-
-mongoose.connect(`mongodb://${mongoHost}:${config.database.port}/${config.database.name}`);
+if (config.database.user && config.database.password) {
+  mongoose.connect(`mongodb://${config.database.user}:${config.database.password}@${config.database.host}:${config.database.port}/${config.database.name}`);
+} else {
+  mongoose.connect(`mongodb://${config.database.host}:${config.database.port}/${config.database.name}`);
+}
 
 const sport = mongoose.model('Sport', require('./sport'));
 const activity = mongoose.model('Activity', require('./activity'));
