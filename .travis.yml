@@ -2,11 +2,8 @@ language: node_js
 node_js:
   - '6'
   - node
-cache:
-  directories:
-  - "$HOME/google-cloud-sdk/"
 env:
-  - CXX=g++-4.8 PATH=$PATH:${HOME}/google-cloud-sdk/bin CLOUDSDK_CORE_DISABLE_PROMPTS=1
+  - CXX=g++-4.8 PATH=$PATH:${HOME}/google-cloud-sdk/bin
 addons:
   apt:
     sources:
@@ -17,10 +14,11 @@ services:
   - mongodb
 before_install:
   - openssl aes-256-cbc -K $encrypted_8fee40646b40_key -iv $encrypted_8fee40646b40_iv -in client-secret.json.enc -out client-secret.json -d
-  - if [ ! -d ${HOME}/google-cloud-sdk ]; then
-       curl https://sdk.cloud.google.com | bash;
-    fi
-  - exec -l $SHELL
+  - curl -s 'https://dl.google.com/dl/cloudsdk/channels/rapid/downloads/google-cloud-sdk-168.0.0-linux-x86_64.tar.gz' > ${HOME}/google-cloud-sdk.tar.gz
+  - tar -xzf $HOME/google-cloud-sdk.tar.gz -C $HOME
+  - CLOUDSDK_CORE_DISABLE_PROMPTS=1 $HOME/google-cloud-sdk/install.sh
+  - source $HOME/google-cloud-sdk/path.bash.inc
+  - source $HOME/google-cloud-sdk/completion.bash.inc
   - gcloud auth activate-service-account --key-file client-secret.json
 install:
   - gcloud config set project first-discovery-166919
