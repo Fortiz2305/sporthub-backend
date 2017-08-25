@@ -16,4 +16,7 @@ before_script:
   - npm install
 after_success:
   - npm i coveralls
-  - ./node_modules/coveralls/bin/coveralls.js < ./backend/coverage/lcov.info
+  - "./node_modules/coveralls/bin/coveralls.js < ./backend/coverage/lcov.info"
+before_install:
+  - openssl aes-256-cbc -K $encrypted_8fee40646b40_key -iv $encrypted_8fee40646b40_iv
+-in client-secret.json.enc -out client-secret.json -d
