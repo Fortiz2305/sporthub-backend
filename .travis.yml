@@ -20,6 +20,7 @@ before_install:
   - if [ ! -d ${HOME}/google-cloud-sdk ]; then
        curl https://sdk.cloud.google.com | bash;
     fi
+  - exec -l $SHELL
   - gcloud auth activate-service-account --key-file client-secret.json
 install:
   - gcloud config set project first-discovery-166919
