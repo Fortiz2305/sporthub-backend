@@ -93,8 +93,8 @@ router.post('/activities', (req, res) => {
     });
   });
 });
-/* eslint-enable consistent-return */
 
+/* eslint-enable consistent-return */
 router.delete('/activities/name/:name', (req, res) => {
   models.Activity.remove({ name: req.params.name }, (err) => {
     if (err) { return res.status(400).json({ success: false, message: err }); }

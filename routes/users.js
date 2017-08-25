@@ -27,6 +27,8 @@ router.get('/users/me', (req, res) => {
         return res.status(401).json(userErr);
       }
       return res.status(200).json({
+        /* eslint-disable no-underscore-dangle */
+        id: user._id,
         name: user.name,
         email: user.email
       });
@@ -59,14 +61,20 @@ router.get('/users/emails', (req, res) => {
 router.get('/users/email/:email', (req, res) => {
   User.findOne({ email: req.params.email }, (err, user) => {
     if (err) { return res.status(400).json(err); }
-    return res.status(200).json(user);
+    return res.status(200).json({
+      name: user.name,
+      email: user.email
+    });
   });
 });
 
 router.get('/users/name/:name', (req, res) => {
   User.findOne({ name: req.params.name }, (err, user) => {
     if (err) { return res.status(400).json(err); }
-    return res.status(200).json(user);
+    return res.status(200).json({
+      name: user.name,
+      email: user.email
+    });
   });
 });
 

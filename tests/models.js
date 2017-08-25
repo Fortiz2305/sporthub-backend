@@ -61,7 +61,7 @@ describe('SportHub API', () => {
   it('can load a Sport', (done) => {
     testSport.save((err) => {
       assert.ifError(err);
-      const url = `${rootUrl}/sport/name/${testSport.name}`;
+      const url = `${rootUrl}/sports/name/${testSport.name}`;
       superagent.get(url, (error, res) => {
         assert.ifError(error);
         let result;

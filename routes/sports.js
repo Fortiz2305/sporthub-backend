@@ -4,7 +4,7 @@ const Sport = require('../models').Sport;
 
 const router = express.Router();
 
-router.get('/sport/check', (req, res) => {
+router.get('/sports/check', (req, res) => {
   res.status(200).json('ok');
 });
 
@@ -18,14 +18,14 @@ router.get('/sports', (req, res) => {
   });
 });
 
-router.get('/sport/name/:name', (req, res) => {
+router.get('/sports/name/:name', (req, res) => {
   Sport.findOne({ name: req.params.name }, (error, sport) => {
     if (error) return res.status(400).send(error);
     return res.status(200).json(sport);
   });
 });
 
-router.post('/sport', (req, res, next) => {
+router.post('/sports', (req, res, next) => {
   const data = req.body;
   if (!data.name || !data.numPlayers) {
     return res.status(400).json({ success: false, message: 'name and numPlayers fields are mandatory' });
@@ -41,7 +41,7 @@ router.post('/sport', (req, res, next) => {
   return next();
 });
 
-router.delete('/sport/name/:name', (req, res) => {
+router.delete('/sports/name/:name', (req, res) => {
   Sport.remove({ name: req.params.name }, (err) => {
     if (err) { return res.status(400).send(err); }
     return res.status(204).json({
