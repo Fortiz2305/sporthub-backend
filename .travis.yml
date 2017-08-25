@@ -6,7 +6,7 @@ cache:
   directories:
   - "$HOME/google-cloud-sdk/"
 env:
-  - CXX=g++-4.8
+  - CXX=g++-4.8 PATH=$PATH:${HOME}/google-cloud-sdk/bin CLOUDSDK_CORE_DISABLE_PROMPTS=1
 addons:
   apt:
     sources:
@@ -15,11 +15,6 @@ addons:
       - g++-4.8
 services:
   - mongodb
-before_script:
-  - npm install
-after_success:
-  - npm i coveralls
-  - "./node_modules/coveralls/bin/coveralls.js < ./backend/coverage/lcov.info"
 before_install:
   - openssl aes-256-cbc -K $encrypted_8fee40646b40_key -iv $encrypted_8fee40646b40_iv -in client-secret.json.enc -out client-secret.json -d
   - if [ ! -d ${HOME}/google-cloud-sdk ]; then
@@ -30,3 +25,8 @@ install:
   - gcloud config set project first-discovery-166919
   - gcloud config set compute/zone europe-west1
   - gcloud compute instances list
+before_script:
+  - npm install
+after_success:
+  - npm i coveralls
+  - "./node_modules/coveralls/bin/coveralls.js < ./backend/coverage/lcov.info"
