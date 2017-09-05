@@ -31,3 +31,4 @@ before_script:
 after_success:
   - npm i coveralls
   - "./node_modules/coveralls/bin/coveralls.js < ./backend/coverage/lcov.info"
+  - ./push_image.sh
